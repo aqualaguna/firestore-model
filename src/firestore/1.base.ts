@@ -33,7 +33,9 @@ export enum CollectionCaseType {
      */
     PascalCase = 'pascal'
 }
+export var now = admin.firestore.FieldValue.serverTimestamp();
 export class Base {
+    protected timestamp : boolean = true;
     protected docRef: admin.firestore.DocumentReference | null = null;
     /**
      * set a default collection naming convention

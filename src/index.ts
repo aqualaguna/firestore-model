@@ -1,6 +1,6 @@
-import { CreateLayer } from "./chain/3.create";
+import { FakerLayer } from "./firestore/6.faker";
 
-export class FirestoreModel extends CreateLayer {
+export class FirestoreModel extends FakerLayer {
     constructor() {
         super();
     }
