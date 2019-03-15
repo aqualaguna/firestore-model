@@ -1,7 +1,7 @@
 {
   "name": "firestore-model",
   "version": "1.0.0",
-  "description": "",
+  "description": "simple orm model for easing workflow. writed in typescript.",
   "main": "lib/index",
   "types": "lib/index",
   "scripts": {
@@ -11,8 +11,8 @@
     "test": "jest",
     "test-watch": "jest --watchAll"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["firestore", "orm", "simple", "alpha"],
+  "author": "aqualaguna",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^24.0.9",

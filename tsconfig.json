@@ -59,5 +59,13 @@
 
     /* Advanced Options */
     "resolveJsonModule": true                 /* Include modules imported with '.json' extension */
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "lib",
+    "credential.json",
+    "test/**",
+    "**/tests/*.test.ts",
+    "src/tests"
+  ]
 }
