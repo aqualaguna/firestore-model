@@ -35,7 +35,7 @@ git clone https://github.com/aqualaguna/firestore-model.git
 ## Example
 0. Authentication
 ```
-import { Authentication } from "firestore-class/authentication";
+import { Authentication } from "firestore-class/lib/authentication";
 import credential = require('./credential.json');
 // or
 const credential = require('./credential.json');
