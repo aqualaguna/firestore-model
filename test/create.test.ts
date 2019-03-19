@@ -57,6 +57,19 @@ describe('Create data', () => {
         expect(t.createdAt).toBeUndefined();
         expect(t.updatedAt).toBeUndefined();
     });
+    it('save method with predefined id', async () => {
+        let t = new UserDetail();
+        t.id = 'hello'
+        t.name = 'test';
+        t.email = "test@example.com";
+        t.password = "hahaha";
+        t.description = "desc";
+        expect(await t.save()).toBeTruthy();
+        expect(t.id).toBe('hello');
+        expect(t.createdAt).toBeUndefined();
+        expect(t.updatedAt).toBeUndefined();
+        await t.delete();
+    });
     it('save method with timestamp', async () => {
         let t = new Temp();
         t.name = 'test';

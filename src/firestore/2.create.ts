@@ -1,4 +1,5 @@
 import { Base, now } from "./1.base";
+import { DocumentReference, WriteResult } from "@google-cloud/firestore";
 /**
  * interface for create Layer.
  * caution some of static method must be implemented!
@@ -38,10 +39,10 @@ export class CreateLayer extends Base implements CreateLayerInterface{
             if (this.id && typeof this.id === 'string') {
                 // if the id is set then use the id and update
                 // @ts-ignore
-                return this.constructor.collection().doc(this.id).set(temp).then(async (d: FirebaseFirestore.DocumentReference) => {
+                return this.constructor.collection().doc(this.id).set(temp).then(async (d: WriteResult) => {
                     // @ts-ignore
                     this.docRef = this.constructor.collection().doc(this.id);
-                    this.fill(await d.get().then(t => t.data()));
+                    this.fill(this.docRef ? await this.docRef.get().then(t => t.data()) : {});
                     return Promise.resolve(true);
                 });
             } else {

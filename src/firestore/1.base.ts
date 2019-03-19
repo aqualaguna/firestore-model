@@ -83,6 +83,12 @@ export class Base {
     static collection() : admin.firestore.CollectionReference {
         return this.firestore().collection(this.getCollectionName())
     }
+    /**
+     * get document reference for current object
+     */
+    getDocument(): admin.firestore.DocumentReference | null {
+        return this.docRef;
+    }
 
     /**
      * convert this instance to simple object

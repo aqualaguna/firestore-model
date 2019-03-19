@@ -1,9 +1,14 @@
 {
   "name": "firestore-class",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "simple orm model for easing workflow. writed in typescript.",
   "main": "lib/index",
   "types": "lib/index",
+  "homepage": "https://github.com/aqualaguna/firestore-model",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aqualaguna/firestore-model"
+  },
   "scripts": {
     "start": "npm run build:live",
     "build": "tsc -p .",
@@ -11,7 +16,12 @@
     "test": "jest",
     "test-watch": "jest --watchAll"
   },
-  "keywords": ["firestore", "orm", "simple", "alpha"],
+  "keywords": [
+    "firestore",
+    "orm",
+    "simple",
+    "alpha"
+  ],
   "author": "aqualaguna",
   "license": "ISC",
   "devDependencies": {
