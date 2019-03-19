@@ -64,6 +64,10 @@ export declare class Base {
      */
     static collection(): admin.firestore.CollectionReference;
     /**
+     * get document reference for current object
+     */
+    getDocument(): admin.firestore.DocumentReference | null;
+    /**
      * convert this instance to simple object
      */
     toObject(): object;
