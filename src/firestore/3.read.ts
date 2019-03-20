@@ -10,36 +10,26 @@ export class ReadLayer extends CreateLayer {
      * find document by id
      * @param ids Array of string / string. identification
      */
-    static async find(ids: Array<string> | string) {
+    static async find(ids: Array<string> | string) : Promise<any>{
         let res :any = null;
-        if(ids instanceof Array) {
-            res = [];
-            let listdocref: admin.firestore.DocumentReference[] = [];
-            ids.forEach(id => listdocref.push(this.collection().doc(id)));
-            this.firestore().getAll(...listdocref).then(docs => {
-                docs.forEach(doc => {
-                    if (doc.exists) {
-                        let t = new this();
-                        t.id = doc.id;
-                        t.docRef = doc.ref;
-                        t.fill(doc.data());
-                        res.push(t);
-                    }
-                })
-            })
-            return res;
-        } else {
-            this.collection().doc(ids).get().then((d) => {
-                if (d.exists) {
+        if(!(ids instanceof Array)) {
+            ids = [ids];
+        }
+        res = [];
+        let listdocref: admin.firestore.DocumentReference[] = [];
+        ids.forEach(id => listdocref.push(this.collection().doc(id)));
+        await this.firestore().getAll(...listdocref).then(docs => {
+            docs.forEach(doc => {
+                if (doc.exists) {
                     let t = new this();
-                    t.id = d.id;
-                    t.docRef = d.ref;
-                    t.fill(d.data());
-                    res = t;
+                    t.id = doc.id;
+                    t.docRef = doc.ref;
+                    t.fill(doc.data());
+                    res.push(t);
                 }
             })
-        }
-        return res;
+        })
+        return res.length == 1 ? res[0] : res;
     }
 
     /**

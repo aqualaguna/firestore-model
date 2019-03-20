@@ -1,7 +1,7 @@
 import { FirestoreModel } from "../src";
 import credential = require('../credential.json');
 import { Authentication } from "../src/authentication";
-
+jest.setTimeout(30000);
 class UserDetail extends FirestoreModel {
     attribute = {
         name: '',
