@@ -28,12 +28,12 @@ export class CreateLayer extends Base implements CreateLayerInterface{
         if (this.docRef) {
             // then update the data
             if(this.timestamp) {
-                temp.updatedAt = now;
+                temp.updated_at = now;
             }
             return this.docRef.set(temp).then(d => Promise.resolve(true));
         } else {
             if(this.timestamp) {
-                temp.updatedAt = temp.createdAt = now;
+                temp.updated_at = temp.created_at = now;
             }
             //create the data
             if (this.id && typeof this.id === 'string') {
@@ -77,7 +77,7 @@ export class CreateLayer extends Base implements CreateLayerInterface{
                 }
                 // @ts-ignore
                 if(this.timestamp) {
-                    temp.updatedAt = temp.createdAt = now;
+                    temp.updated_at = temp.created_at = now;
                 }
                 return this.collection().add(temp).then(async d => {
                     let res = new this();          

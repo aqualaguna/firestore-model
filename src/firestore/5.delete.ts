@@ -23,4 +23,17 @@ export class DeleteLayer extends UpdateLayer {
     public isExists() : boolean{
         return this.docRef ? true : false;
     }
+    
+    /**
+     * delete all document in collection
+     */
+    static deleteAll() : Promise<any> {
+        let batch = this.firestore().batch();
+        return this.collection().listDocuments().then(val => {
+            val.map((val) => {
+                batch.delete(val)
+            })
+            batch.commit()
+        })
+    }
 }
