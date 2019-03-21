@@ -25,13 +25,17 @@ export declare enum CollectionCaseType {
      */
     ParamCase = "param",
     /**
-     * CamelCase = 'ParamCase'
+     * Pascal = 'ParamCase'
      */
     PascalCase = "pascal"
 }
 export declare var now: FirebaseFirestore.FieldValue;
+export declare var deleteField: FirebaseFirestore.FieldValue;
 export declare class Base {
     protected timestamp: boolean;
+    protected mark: string[];
+    protected markValue: any;
+    protected unmarkValue: any;
     protected docRef: admin.firestore.DocumentReference | null;
     /**
      * set a default collection naming convention
@@ -47,10 +51,6 @@ export declare class Base {
      */
     protected keys: string[];
     [key: string]: any;
-    /**
-     * initialize the model to be used. for some reason this cant be placed in base constructor
-     */
-    init(): void;
     /**
      * get firestore db only used for internal class can't called by outside
      */

@@ -12,4 +12,8 @@ export declare class DeleteLayer extends UpdateLayer {
      * check if the document is exists in database
      */
     isExists(): boolean;
+    /**
+     * delete all document in collection
+     */
+    static deleteAll(): Promise<any>;
 }
