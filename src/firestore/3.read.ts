@@ -29,7 +29,7 @@ export class ReadLayer extends CreateLayer {
                 }
             })
         })
-        return res.length == 1 ? res[0] : res;
+        return res.length > 1 ? res : (res.length == 1 ? res[0] : null);
     }
 
     /**
