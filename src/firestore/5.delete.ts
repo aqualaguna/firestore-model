@@ -9,19 +9,28 @@ export class DeleteLayer extends UpdateLayer {
     /**
      * delete the current document
      */
-    public delete() : Promise<boolean> | null{
+    public async delete() : Promise<boolean>{
         const self = this;
+        // @ts-ignore
+        if(!(await this.constructor.deleting(this.id))) {
+            throw new Error("deleting permission denied.");
+        }
         return this.docRef ? this.docRef.delete().then(() => {
             self.docRef = null;
+            // @ts-ignore
+            this.constructor.deleted(this.id)
             return true;
-        }).catch(d => false) : null;
+        }).catch(d => false) : false;
     }
+    
+
     /**
      * check if the document is exists in database
+     * @param id documentID
      */
-
-    public isExists() : boolean{
-        return this.docRef ? true : false;
+    public static async isExists(id: string) : Promise<boolean> {
+        // check the id
+        return this.collection().doc(id).get().then(d => d.exists).catch(() => false);
     }
     
     /**
@@ -33,7 +42,21 @@ export class DeleteLayer extends UpdateLayer {
             val.map((val) => {
                 batch.delete(val)
             })
-            batch.commit()
+            return batch.commit()
         })
+    }
+
+     /**
+     * event before delete to execute. override this method to implement.
+     */
+    protected static async deleting(id: string) : Promise<boolean>{
+        return true;
+    }
+
+    /**
+     * event after delete to execute. override this method to implement.
+     */
+    protected static async deleted(id:string) : Promise<boolean>{
+        return true;
     }
 }

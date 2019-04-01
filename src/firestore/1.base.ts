@@ -1,6 +1,7 @@
 import { Authentication } from "../authentication";
 import * as admin from 'firebase-admin';
 import * as changeCase from 'change-case';
+import { now } from '../type'
 /// <reference path="change-case/change-case.d.ts" />
 /**
  * enumeration for style of name collection
@@ -33,7 +34,7 @@ export enum CollectionCaseType {
      */
     PascalCase = 'pascal'
 }
-export var now = admin.firestore.FieldValue.serverTimestamp();
+
 export var deleteField = admin.firestore.FieldValue.delete();
 export class Base {
     protected timestamp : boolean = true;
@@ -92,6 +93,23 @@ export class Base {
             temp[key] = this[key];
         }
         return temp as object;
+    }
+    /**
+     * parsing path into a documentReference or a collection based on base class.
+     * @param path path separated by '/'
+     */
+    static pathParse(path: string) : admin.firestore.DocumentReference | admin.firestore.CollectionReference {
+        let temp = path.split('/'), isCollection = true;
+        let res :any = this.collection();
+        for (const data of temp) {
+            if(isCollection) {
+                res = res.doc(data);
+            } else {
+                res = res.collection(data);
+            }
+            isCollection = !isCollection;
+        }
+        return res;
     }
 
 }

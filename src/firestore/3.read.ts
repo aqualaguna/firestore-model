@@ -50,4 +50,9 @@ export class ReadLayer extends CreateLayer {
             return res;
         })
     }
+
+    public async refresh() {
+        let temp = this.docRef ? await this.docRef.get().then(d => d.data()) : {};
+        this.fill(temp);
+    }
 }

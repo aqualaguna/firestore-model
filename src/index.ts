@@ -1,6 +1,6 @@
 import { FakerLayer } from "./firestore/6.faker";
 import * as changeCase from 'change-case';
-import { now } from "./firestore/1.base";
+import { now } from './type'
 
 export class FirestoreModel extends FakerLayer {
     constructor() {
