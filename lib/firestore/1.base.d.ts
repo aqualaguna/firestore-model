@@ -29,7 +29,6 @@ export declare enum CollectionCaseType {
      */
     PascalCase = "pascal"
 }
-export declare var now: FirebaseFirestore.FieldValue;
 export declare var deleteField: FirebaseFirestore.FieldValue;
 export declare class Base {
     protected timestamp: boolean;
@@ -71,4 +70,9 @@ export declare class Base {
      * convert this instance to simple object
      */
     toObject(): object;
+    /**
+     * parsing path into a documentReference or a collection based on base class.
+     * @param path path separated by '/'
+     */
+    static pathParse(path: string): admin.firestore.DocumentReference | admin.firestore.CollectionReference;
 }

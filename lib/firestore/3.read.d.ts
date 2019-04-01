@@ -12,4 +12,5 @@ export declare class ReadLayer extends CreateLayer {
      * get all data from collections
      */
     static all(): Promise<any>;
+    refresh(): Promise<void>;
 }
