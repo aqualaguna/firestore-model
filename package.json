@@ -1,6 +1,6 @@
 {
   "name": "firestore-class",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "simple orm model for easing workflow. writed in typescript.",
   "main": "lib/index",
   "types": "lib/index",
