@@ -36,7 +36,7 @@ export class CreateLayer extends Base implements CreateLayerInterface{
             if(this.timestamp) {
                 temp.updated_at = now;
             }
-            return this.docRef.set(temp).then(d => {
+            return this.docRef.update(temp).then(d => {
                 // @ts-ignore
                 this.constructor.updated(this.id, temp);
                 return Promise.resolve(true);
