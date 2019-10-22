@@ -146,6 +146,7 @@ export class CreateLayer extends Base implements CreateLayerInterface{
      */
     async set(data: DocumentSnapshot | DocumentReference) {
         if (data instanceof DocumentSnapshot) {
+            this.docRef = data.ref;
             this.id = data.id;
             this.fill(data.data());
         } else if(data instanceof DocumentReference) {

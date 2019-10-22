@@ -16,7 +16,8 @@ export class UpdateLayer extends ReadLayer {
         if (this.timestamp) {
             data.updated_at = now
         }
-        if(!(await this.updating(data))) {
+        // @ts-ignore
+        if(!(await this.constructor.updating(data))) {
             throw new Error("updating permission denied.");
         }
         return this.docRef ? this.docRef.update(data).then(() => {
