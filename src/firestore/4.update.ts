@@ -24,7 +24,8 @@ export class UpdateLayer extends ReadLayer {
             Object.keys(data).forEach(key => {
                 self[key] = data[key];
             });
-            this.updated(this.id, data);
+            // @ts-ignore
+            this.constructor.updated(this.id, data);
             return true;
         }) : false;
     }
