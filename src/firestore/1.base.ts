@@ -12,7 +12,7 @@ export enum CollectionCaseType {
      * ConstantCase = 'USER_DETAIL'
      */
 
-    ConstantCase ='constant',
+    ConstantCase = 'constant',
     /**
      * SnakeCase = 'user_detail'
      */
@@ -37,20 +37,20 @@ export enum CollectionCaseType {
 
 export var deleteField = admin.firestore.FieldValue.delete();
 export class Base {
-    protected timestamp : boolean = true;
-    protected mark : string[] = [];
-    protected markValue : any = now;
-    protected unmarkValue : any = null;
+    protected timestamp: boolean = true;
+    protected mark: string[] = [];
+    protected markValue: any = now;
+    protected unmarkValue: any = null;
     protected docRef: admin.firestore.DocumentReference | null = null;
     /**
      * set a default collection naming convention
      */
-    protected static collectionStyle : CollectionCaseType = CollectionCaseType.SnakeCase;
+    protected static collectionStyle: CollectionCaseType = CollectionCaseType.SnakeCase;
     protected attribute: any;
     /**
      * in case there is new instance with no parameter default attribute is used.
      */
-    protected defaultAttribute :any;
+    protected defaultAttribute: any;
     /**
      * keys of existed in attribute the value is Object.keys(attribute)
      */
@@ -60,37 +60,40 @@ export class Base {
     /**
      * get firestore db only used for internal class can't called by outside
      */
-    protected static firestore() : admin.firestore.Firestore {
+    protected static firestore (): admin.firestore.Firestore {
         return Authentication.firestore;
     }
 
     /**
      * get collection by class name
      */
-    static getCollectionName(type: CollectionCaseType = this.collectionStyle): string {
-        
+    static getCollectionName (type: CollectionCaseType = this.collectionStyle): string {
+
         return changeCase[type](this.name);
     }
     /**
      * get collection reference
      */
-    static collection() : admin.firestore.CollectionReference {
+    static collection (): admin.firestore.CollectionReference {
         return this.firestore().collection(this.getCollectionName())
     }
     /**
      * get document reference for current object
      */
-    getDocument(): admin.firestore.DocumentReference | null {
+    getDocument (): admin.firestore.DocumentReference | null {
         return this.docRef;
     }
 
     /**
      * convert this instance to simple object
      */
-    toObject() : object {
-        let temp : any = {};
+    toObject (): object {
+        let temp: any = {};
         for (const key of this.keys) {
             temp[key] = this[key];
+        }
+        if (this.id) {
+            temp.id = this.id
         }
         return temp as object;
     }
@@ -98,11 +101,11 @@ export class Base {
      * parsing path into a documentReference or a collection based on base class.
      * @param path path separated by '/'
      */
-    static pathParse(path: string) : admin.firestore.DocumentReference | admin.firestore.CollectionReference {
+    static pathParse (path: string): admin.firestore.DocumentReference | admin.firestore.CollectionReference {
         let temp = path.split('/'), isCollection = true;
-        let res :any = this.collection();
+        let res: any = this.collection();
         for (const data of temp) {
-            if(isCollection) {
+            if (isCollection) {
                 res = res.doc(data);
             } else {
                 res = res.collection(data);

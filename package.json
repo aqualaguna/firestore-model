@@ -1,6 +1,6 @@
 {
   "name": "firestore-class",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "simple orm model for easing workflow. writed in typescript.",
   "main": "lib/index",
   "types": "lib/index",
@@ -11,7 +11,9 @@
   },
   "scripts": {
     "start": "npm run build:live",
-    "build": "tsc -p .",
+    "clean": "rm -rf lib",
+    "build:publish": "npm run build && npm publish",
+    "build": "npm run clean && tsc -p .",
     "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "test": "jest",
     "test-watch": "jest --watchAll"
